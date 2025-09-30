@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS customers (
 );
 
 CREATE TABLE IF NOT EXISTS accounts (
-    account_number BIGSERIAL PRIMARY KEY NOT NULL,
+    account_number BIGINT PRIMARY KEY NOT NULL,
     customer_id INT8 NOT NULL,
     account_type VARCHAR(100) NOT NULL,
     branch_address VARCHAR(200) NOT NULL,
