@@ -1,8 +1,5 @@
 package com.promath.accounts.constants;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-
 public final class AccountConstants {
 
     private AccountConstants() {}

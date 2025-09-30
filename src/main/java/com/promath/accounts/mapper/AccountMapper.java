@@ -5,14 +5,16 @@ import com.promath.accounts.entities.Account;
 
 public final class AccountMapper {
 
-    public static AccountDTO mapToAccountDTO(Account account, AccountDTO accountDTO) {
+    public static AccountDTO mapToAccountDTO(Account account) {
+        AccountDTO accountDTO = new AccountDTO();
         accountDTO.setAccountNumber(account.getAccountNumber());
         accountDTO.setAccountType(account.getAccountType());
         accountDTO.setBranchAddress(account.getBranchAddress());
         return accountDTO;
     }
 
-    public static Account mapToAccountEntity(AccountDTO accountDTO, Account account) {
+    public static Account mapToAccountEntity(AccountDTO accountDTO) {
+        Account account = new Account();
         account.setAccountNumber(account.getAccountNumber());
         account.setAccountType(accountDTO.getAccountType());
         account.setBranchAddress(accountDTO.getBranchAddress());
