@@ -1,4 +1,4 @@
-package com.promath.entities;
+package com.promath.accounts.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.promath.dto;
+package com.promath.accounts.dto;
 
 import lombok.Data;
 
