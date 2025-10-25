@@ -1,6 +1,7 @@
 package com.promath.accounts.controller;
 
 import com.promath.accounts.constants.AccountConstants;
+import com.promath.accounts.dto.AccountDTO;
 import com.promath.accounts.dto.CustomerDTO;
 import com.promath.accounts.dto.ResponseDTO;
 import com.promath.accounts.service.IAccountService;
@@ -23,5 +24,12 @@ public class AccountsController {
         // The ResponseEntity helps send data to the headers
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ResponseDTO(AccountConstants.STATUS_CREATED_201, AccountConstants.CREATED_MESSAGE));
+    }
+
+    @GetMapping(value = "/details")
+    public ResponseEntity<CustomerDTO> fetchAccountDetails(@RequestParam String mobileNumber) {
+        CustomerDTO customerDetails = accountService.getAccountDetails(mobileNumber);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(customerDetails);
     }
 }

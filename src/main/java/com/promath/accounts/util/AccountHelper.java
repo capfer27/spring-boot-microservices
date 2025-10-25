@@ -31,4 +31,10 @@ public final class AccountHelper {
     private static long getRandomAccountNumber() {
         return MIN_BOUND + new Random().nextInt(MAX_BOUND);
     }
+
+    public static String constructErrorMessage(String resourceName, String fieldName, String fieldValue) {
+        String formatted = String.format("%s not found with the given input data %s : '%s'",
+                resourceName, fieldName, fieldValue);
+        return formatted;
+    }
 }
