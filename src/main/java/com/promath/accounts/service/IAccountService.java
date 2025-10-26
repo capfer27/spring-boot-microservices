@@ -24,4 +24,13 @@ public interface IAccountService {
      * @return - {@link CustomerDTO }
      */
     boolean updateAccount(CustomerDTO customerDTO);
+
+    /**
+     * Delete an account based on mobile number
+     * @param mobileNumber - the unique object identifier
+     * @return - {@link CustomerDTO }
+     */
+    boolean deleteAccount(String mobileNumber);
+
+
 }
