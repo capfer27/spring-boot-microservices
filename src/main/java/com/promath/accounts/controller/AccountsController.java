@@ -1,7 +1,6 @@
 package com.promath.accounts.controller;
 
 import com.promath.accounts.constants.AccountConstants;
-import com.promath.accounts.dto.AccountDTO;
 import com.promath.accounts.dto.CustomerDTO;
 import com.promath.accounts.dto.ResponseDTO;
 import com.promath.accounts.service.IAccountService;
@@ -31,5 +30,19 @@ public class AccountsController {
         CustomerDTO customerDetails = accountService.getAccountDetails(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(customerDetails);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDTO> updateAccount(@RequestBody CustomerDTO customerDTO) {
+        boolean isUpdate = accountService.updateAccount(customerDTO);
+        if (!isUpdate) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(AccountConstants.SERVER_STATUS_ERROR_500,
+                            AccountConstants.SERVER_ERROR_MESSAGE)
+                    );
+        }
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO(AccountConstants.STATUS_OK_200, AccountConstants.MESSAGE_OK));
     }
 }

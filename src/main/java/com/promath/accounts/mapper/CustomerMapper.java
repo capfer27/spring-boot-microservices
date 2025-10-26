@@ -26,4 +26,13 @@ public final class CustomerMapper {
         customer.setCreatedBy(ANONYMOUS);
         return customer;
     }
+
+    public static Customer mapToCustomerEntity(CustomerDTO customerDTO, Customer customer) {
+        customer.setName(customerDTO.getName());
+        customer.setEmail(customerDTO.getEmail());
+        customer.setMobileNumber(customerDTO.getMobileNumber());
+        customer.setCreatedAt(LocalDateTime.now()); // TODO: Auto populate this field using JPA
+        customer.setCreatedBy(ANONYMOUS);
+        return customer;
+    }
 }

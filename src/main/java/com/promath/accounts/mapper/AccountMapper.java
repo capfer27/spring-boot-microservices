@@ -15,7 +15,14 @@ public final class AccountMapper {
 
     public static Account mapToAccountEntity(AccountDTO accountDTO) {
         Account account = new Account();
-        account.setAccountNumber(account.getAccountNumber());
+        account.setAccountNumber(accountDTO.getAccountNumber());
+        account.setAccountType(accountDTO.getAccountType());
+        account.setBranchAddress(accountDTO.getBranchAddress());
+        return account;
+    }
+
+    public static Account mapToAccountEntity(AccountDTO accountDTO, Account account) {
+        account.setAccountNumber(accountDTO.getAccountNumber());
         account.setAccountType(accountDTO.getAccountType());
         account.setBranchAddress(accountDTO.getBranchAddress());
         return account;

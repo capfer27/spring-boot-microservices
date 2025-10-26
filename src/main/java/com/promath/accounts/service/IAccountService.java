@@ -6,16 +6,22 @@ import com.promath.accounts.dto.CustomerDTO;
 public interface IAccountService {
 
     /**
-     *
+     * Create a new account number
      * @param customerDTO - {@link CustomerDTO }
      */
     void createAccount(CustomerDTO customerDTO);
 
     /**
      * Fetch customer account details
-     *
-     * @param mobileNumber
-     * @return - {@link AccountDTO }
+     * @param mobileNumber - the customer unique mobile number
+     * @return - {@link CustomerDTO }
      */
     CustomerDTO getAccountDetails(String mobileNumber);
+
+    /**
+     * Update an account by a give data transfer object
+     * @param customerDTO - the Data Transfer Object
+     * @return - {@link CustomerDTO }
+     */
+    boolean updateAccount(CustomerDTO customerDTO);
 }

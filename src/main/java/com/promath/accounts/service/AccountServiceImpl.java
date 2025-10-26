@@ -23,10 +23,6 @@ public class AccountServiceImpl implements IAccountService {
     private final AccountRepository accountRepository;
     private final CustomerRepository customerRepository;
 
-    /**
-     * Create a new account number
-     * @param customerDTO - {@link CustomerDTO }
-     */
     @Override
     public void createAccount(CustomerDTO customerDTO) {
 
@@ -43,12 +39,6 @@ public class AccountServiceImpl implements IAccountService {
         accountRepository.save(AccountHelper.createAccount(savedCustomer));
     }
 
-    /**
-     * Fetch customer account details
-     *
-     * @param mobileNumber - the customer mobile number
-     * @return Account Details based on mobile number
-     */
     @Override
     public CustomerDTO getAccountDetails(String mobileNumber) {
         Customer customer = customerRepository.findByMobileNumber(mobileNumber)
@@ -76,5 +66,40 @@ public class AccountServiceImpl implements IAccountService {
         customerDTO.setAccountDTO(accountDTO);
 
         return customerDTO;
+    }
+
+    @Override
+    public boolean updateAccount(CustomerDTO customerDTO) {
+        boolean isUpdated = false;
+        AccountDTO accountDTO = customerDTO.getAccountDTO();
+        if (accountDTO != null) {
+            Optional<Account> optionalAccount = accountRepository.findById(accountDTO.getAccountNumber());
+            if (optionalAccount.isEmpty()) {
+                String message = AccountHelper.constructErrorMessage(
+                        "Account", "AccountNumber", accountDTO.getAccountNumber().toString());
+
+                throw new ResourceNotFoundException(message);
+            }
+            Account account = AccountMapper.mapToAccountEntity(accountDTO, optionalAccount.get());
+            Account savedAccount = accountRepository.save(account);
+
+            Long customerId = savedAccount.getCustomerId();
+            Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+            if (optionalCustomer.isEmpty()) {
+                String message = AccountHelper.constructErrorMessage(
+                        "Customer",
+                        "customerId",
+                        customerId.toString()
+                );
+                throw new ResourceNotFoundException(message);
+            }
+
+            Customer customer = CustomerMapper.mapToCustomerEntity(customerDTO, optionalCustomer.get());
+
+            customerRepository.save(customer);
+            isUpdated = true;
+        }
+
+        return isUpdated;
     }
 }
