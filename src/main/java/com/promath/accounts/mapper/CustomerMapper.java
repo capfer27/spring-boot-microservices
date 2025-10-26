@@ -22,8 +22,6 @@ public final class CustomerMapper {
         customer.setName(customerDTO.getName());
         customer.setEmail(customerDTO.getEmail());
         customer.setMobileNumber(customerDTO.getMobileNumber());
-        customer.setCreatedAt(LocalDateTime.now()); // TODO: Auto populate this field using JPA
-        customer.setCreatedBy(ANONYMOUS);
         return customer;
     }
 
@@ -31,8 +29,6 @@ public final class CustomerMapper {
         customer.setName(customerDTO.getName());
         customer.setEmail(customerDTO.getEmail());
         customer.setMobileNumber(customerDTO.getMobileNumber());
-        customer.setCreatedAt(LocalDateTime.now()); // TODO: Auto populate this field using JPA
-        customer.setCreatedBy(ANONYMOUS);
         return customer;
     }
 }
