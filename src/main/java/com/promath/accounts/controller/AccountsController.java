@@ -67,6 +67,7 @@ public class AccountsController {
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "HTTP Status OK"),
+            @ApiResponse(responseCode = "417", description = "Expectation Failed"),
             @ApiResponse(
                     responseCode = "500",
                     description = "HTTP Status Internal Server Error",
@@ -79,9 +80,9 @@ public class AccountsController {
     public ResponseEntity<ResponseDTO> updateAccount(@Valid @RequestBody CustomerDTO customerDTO) {
         boolean isUpdate = accountService.updateAccount(customerDTO);
         if (!isUpdate) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDTO(AccountConstants.SERVER_STATUS_ERROR_500,
-                            AccountConstants.SERVER_ERROR_MESSAGE)
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDTO(AccountConstants.UPDATE_STATUS_417,
+                            AccountConstants.UPDATE_MESSAGE_417)
                     );
         }
 
@@ -95,6 +96,7 @@ public class AccountsController {
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "HTTP Status OK"),
+            @ApiResponse(responseCode = "417", description = "Expectation Failed"),
             @ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error")
     })
     @DeleteMapping("/delete")
@@ -105,9 +107,9 @@ public class AccountsController {
     ) {
         boolean isUpdate = accountService.deleteAccount(mobileNumber);
         if (!isUpdate) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDTO(AccountConstants.SERVER_STATUS_ERROR_500,
-                            AccountConstants.SERVER_ERROR_MESSAGE)
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDTO(AccountConstants.DELETE_STATUS_417,
+                            AccountConstants.DELETE_MESSAGE_417)
                     );
         }
 
