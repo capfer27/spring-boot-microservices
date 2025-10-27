@@ -2,9 +2,12 @@ package com.promath.accounts.controller;
 
 import com.promath.accounts.constants.AccountConstants;
 import com.promath.accounts.dto.CustomerDTO;
+import com.promath.accounts.dto.ErrorResponseDTO;
 import com.promath.accounts.dto.ResponseDTO;
 import com.promath.accounts.service.IAccountService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -64,7 +67,13 @@ public class AccountsController {
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "HTTP Status OK"),
-            @ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error")
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
     })
     @PutMapping("/update")
     public ResponseEntity<ResponseDTO> updateAccount(@Valid @RequestBody CustomerDTO customerDTO) {
