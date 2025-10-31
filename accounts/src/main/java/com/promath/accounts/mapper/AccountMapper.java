@@ -1,7 +1,7 @@
 package com.promath.accounts.mapper;
 
 import com.promath.accounts.dto.AccountDTO;
-import com.promath.accounts.entities.Account;
+import com.promath.accounts.entity.Account;
 
 public final class AccountMapper {
 

@@ -1,4 +1,4 @@
-package com.promath.accounts.repositories;
+package com.promath.accounts.repository;
 
 import com.promath.accounts.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;

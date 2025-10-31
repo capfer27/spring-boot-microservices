@@ -2,14 +2,14 @@ package com.promath.accounts.service;
 
 import com.promath.accounts.dto.AccountDTO;
 import com.promath.accounts.dto.CustomerDTO;
-import com.promath.accounts.entities.Account;
-import com.promath.accounts.entities.Customer;
+import com.promath.accounts.entity.Account;
+import com.promath.accounts.entity.Customer;
 import com.promath.accounts.exception.CustomerAlreadyExistsException;
 import com.promath.accounts.exception.ResourceNotFoundException;
 import com.promath.accounts.mapper.AccountMapper;
 import com.promath.accounts.mapper.CustomerMapper;
-import com.promath.accounts.repositories.AccountRepository;
-import com.promath.accounts.repositories.CustomerRepository;
+import com.promath.accounts.repository.AccountRepository;
+import com.promath.accounts.repository.CustomerRepository;
 import com.promath.accounts.util.AccountHelper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

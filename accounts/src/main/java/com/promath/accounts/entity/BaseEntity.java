@@ -1,4 +1,4 @@
-package com.promath.accounts.entities;
+package com.promath.accounts.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

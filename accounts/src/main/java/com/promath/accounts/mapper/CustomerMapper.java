@@ -1,11 +1,7 @@
 package com.promath.accounts.mapper;
 
 import com.promath.accounts.dto.CustomerDTO;
-import com.promath.accounts.entities.Customer;
-
-import java.time.LocalDateTime;
-
-import static com.promath.accounts.constants.AccountConstants.ANONYMOUS;
+import com.promath.accounts.entity.Customer;
 
 public final class CustomerMapper {
 

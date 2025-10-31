@@ -1,8 +1,8 @@
 package com.promath.accounts.util;
 
 import com.promath.accounts.constants.AccountConstants;
-import com.promath.accounts.entities.Account;
-import com.promath.accounts.entities.Customer;
+import com.promath.accounts.entity.Account;
+import com.promath.accounts.entity.Customer;
 
 import java.util.Random;
 
