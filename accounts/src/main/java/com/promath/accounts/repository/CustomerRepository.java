@@ -1,6 +1,6 @@
 package com.promath.accounts.repositories;
 
-import com.promath.accounts.entities.Customer;
+import com.promath.accounts.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
