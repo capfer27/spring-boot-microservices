@@ -29,7 +29,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
         ),
         externalDocs = @ExternalDocumentation(
                 description = "Capfer Accounts microservice REST API Documentation",
-                url = "hhtps://capfer-promath.com/swagger-ui.com.html"
+                url = "https://capfer-promath.com/swagger-ui.com.html"
         )
 )
 public class AccountsApplication {

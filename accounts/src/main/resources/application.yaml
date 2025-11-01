@@ -1,6 +1,6 @@
 #spring.application.name=accounts
 server:
-  port: 8180
+  port: 8080
 spring:
   application:
     name: accounts

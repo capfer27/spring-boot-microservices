@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `cards` (
   `card_id` BIGSERIAL NOT NULL,
-  `mobile_number` VARCHAR(15) NOT NULL,
+  `mobile_number` VARCHAR(15) UNIQUE NOT NULL,
   `card_number` VARCHAR(100) NOT NULL,
   `card_type` VARCHAR(100) NOT NULL,
   `total_limit` INTEGER NOT NULL,
