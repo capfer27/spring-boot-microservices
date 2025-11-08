@@ -37,3 +37,12 @@ Build or Start docker container based on the image
 
 Port Mapping | Port Forwarding | Port Publishing
  - docker run -p 8080:8080
+
+Buildpack use something called builders.
+The builders are design to analise and build the application.
+ - Buildpacks set
+ - Stack
+ - Lifecycle manager - assemble everything into a file (container image)
+Buildpacks Lifecycle:
+ - Detect - detect language or framework
+ - Build - Fetch dependencies, compile code and configure runtime.
