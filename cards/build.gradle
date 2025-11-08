@@ -8,7 +8,7 @@ plugins {
 group = 'com.capfer'
 version = '0.0.1-SNAPSHOT'
 description = 'Demo project for Spring Boot Cards Microservice'
-jib.to.image = "caito25/${project.name}:v0.0.1"
+//jib.to.image = "caito25/${project.name}:v0.0.1"
 
 java {
 	toolchain {
@@ -43,4 +43,19 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+jib {
+    from {
+        image = "eclipse-temurin:21-jdk-alpine"
+        platforms {
+            platform {
+                architecture = "arm64"
+                os = "linux"
+            }
+        }
+    }
+    to {
+        image = "caito25/${project.name}:v0.0.1"
+    }
 }
