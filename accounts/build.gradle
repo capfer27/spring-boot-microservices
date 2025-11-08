@@ -42,3 +42,18 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+//jar {
+//    archiveFileName = "${project.name}-app--${project.version}.jar"
+//}
+
+
+jar {
+//    archiveFileName = "accounts-app"
+//    archiveBaseName = "accounts-app"
+//    archiveVersion = '0.0.1-SNAPSHOT'
+    manifest {
+        attributes.put('Accounts-App', 'The Bank Account Microservice')
+        attributes.put('The-Snapshot-Version', '0.0.1')
+    }
+}
