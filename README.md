@@ -27,3 +27,13 @@ How to generate docker images
 
 Running the jar file command:
  - java -jar build/libs/accounts-0.0.1-SNAPSHOT.jar
+
+Building docker images commands
+ - docker build . -t caito21/accounts:v0.0.1  ( -t stands for tag)
+ - docker inspect image 15727fc9fd1c (inspect the image)
+
+Build or Start docker container based on the image
+ - docker run -p 8080:8080 caito21/accounts:v0.0.1
+
+Port Mapping | Port Forwarding | Port Publishing
+ - docker run -p 8080:8080
