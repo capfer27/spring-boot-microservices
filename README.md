@@ -46,3 +46,35 @@ The builders are design to analise and build the application.
 Buildpacks Lifecycle:
  - Detect - detect language or framework
  - Build - Fetch dependencies, compile code and configure runtime.
+
+The most common docker commands:
+ - docker images -> list all docker images present in the Docker Server
+ - docker ps -> display or show all running containers
+ - docker ps -a -> show all containers including running and stopped
+ - docker image rm <image id>
+ - docker image inspect <image id> -> display detailed imaged information
+ - docker build . -t <image name> -> generate docker image based on Dockerfile settings
+ - docker run -p [hostPort:ContainerPort] <image name> -> start a docker container based on a given image
+ - docker container start <container id>
+ - docker container stop <container id>
+ - docker container pause <container id>
+ - docker container unpause <container id>
+ - docker container kill <container id>
+ - docker container inspect <container id>
+ - docker container restart <container id>
+ - docker container logs <container id>
+ - docker container logs -f <container id>
+ - docker rm <container id>
+ - docker container prune -> remove all stopped containers
+ - docker image push [container_registry/username:tag] -> to push an image from a container registry
+ - docker image pull [container_registry/username:tag] -> to pull an image from a container registry
+ - docker image prune -> to remove all unused images
+ - docker container stats
+ - docker system prune [--all] -> remove stopped containers, dangling images, and unused networks, volumes and cache.
+ - docker rmi <image id>
+ - docker login -u <username>
+ - docker logout -> log out from docker hub container registry
+ - docker history <image name>
+ - docker exec -it <container id> sh
+ - docker compose up [-d]
+ - docker compose down
