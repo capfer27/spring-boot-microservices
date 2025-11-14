@@ -1,9 +1,7 @@
 package com.promath.accounts.controller;
 
 import com.promath.accounts.constants.AccountConstants;
-import com.promath.accounts.dto.CustomerDTO;
-import com.promath.accounts.dto.ErrorResponseDTO;
-import com.promath.accounts.dto.ResponseDTO;
+import com.promath.accounts.dto.*;
 import com.promath.accounts.service.IAccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,7 +11,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
-@AllArgsConstructor
+//@AllArgsConstructor
 @Validated
 @Tag(
         name = "CRUD REST API for Account in CapferBank",
@@ -31,6 +30,18 @@ import org.springframework.web.bind.annotation.*;
 public class AccountsController {
 
     private final IAccountService accountService;
+    private final Environment environment;
+
+    private final AccountsContactInfoDTO accountsContactInfoDTO;
+
+    @Value(value = "${build.version}")
+    private String version;
+
+    public AccountsController(IAccountService accountService, Environment environment, AccountsContactInfoDTO accountsContactInfoDTO) {
+        this.accountService = accountService;
+        this.environment = environment;
+        this.accountsContactInfoDTO = accountsContactInfoDTO;
+    }
 
     @Operation(
             summary = "CREATE ACCOUNT REST API",
@@ -115,5 +126,72 @@ public class AccountsController {
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(AccountConstants.STATUS_OK_200, AccountConstants.MESSAGE_OK));
+    }
+
+    @Operation(
+            summary = "Get Build Information",
+            description = "Get Build Information that is deployed into accounts microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class))
+            )
+    })
+    @GetMapping(value = "/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(version);
+    }
+
+    @Operation(
+            summary = "Get Java Version Information",
+            description = "Get Java Version Information that is deployed into accounts microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class))
+            )
+    })
+    @GetMapping(value = "/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(environment.getProperty("java.version"));
+//                .body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @Operation(
+            summary = "Get Contact Information",
+            description = "The Contact Information that can be used to reach out in case of any issues"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class))
+            )
+    })
+    @GetMapping(value = "/contact-info")
+    public ResponseEntity<AccountsContactInfoDTO> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountsContactInfoDTO);
     }
 }
