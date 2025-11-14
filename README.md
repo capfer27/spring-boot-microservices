@@ -78,3 +78,20 @@ The most common docker commands:
  - docker exec -it <container id> sh
  - docker compose up [-d]
  - docker compose down
+
+The 15-Factor methodology
+ 1. One codebase, one application
+ 2. API First
+ 3. Dependency Management
+ 4. Design, Build, Release, Run.
+ 5. Configuration, Credentials & Code
+ 6. Logs
+ 7. Disposability
+ 8. Backing Services
+ 9. Environment Parity 
+10. Administrative Processes
+11. Port Binding
+12. Stateless Process
+13. Concurrency
+14. Telemetry
+15. Authentication & Authorization
