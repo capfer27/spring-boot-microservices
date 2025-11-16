@@ -95,3 +95,11 @@ The 15-Factor methodology
 13. Concurrency
 14. Telemetry
 15. Authentication & Authorization
+
+Spring Profiles:
+ - Set up profiles via command line arguments (Program arguments)
+   *  --spring.profiles.active=prod --build.version=1.1
+ - Configure spring profiles via VM Options
+   * -Dspring.profiles.active=prod -Dbuild.version=1.1
+ - Configure spring profiles via Environment Variables
+   * SPRING.PROFILES.ACTIVE=prod;BUILD.VERSION=1.4;
