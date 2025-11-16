@@ -1,0 +1,10 @@
+build:
+  version: '2.0'
+loans:
+  message: "Welcome to CapferBank loans related QA APIs"
+  contactDetails:
+    name: "Mestre Caito - Product Owner"
+    email: "mestercaito25@gmail.com"
+  onCallSupport:
+    - (777) 562-4829
+    - (777) 637-0384

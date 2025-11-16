@@ -1,0 +1,10 @@
+build:
+  version: '1.0'
+accounts:
+  message: "Welcome to CapferBank account related Production APIs"
+  contactDetails:
+    name: "Mestre Caito - Product Owner"
+    email: "mestercaito25@gmail.com"
+  onCallSupport:
+    - (777) 562-4829
+    - (777) 637-0384
