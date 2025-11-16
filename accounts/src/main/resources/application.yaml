@@ -18,23 +18,24 @@ spring:
       ddl-auto: update
     show-sql: true
 
-  config:
-    import:
-      - 'application_qa.yaml'
-      - 'application_prod.yaml'
+# Backed up and no longer required
+#  config:
+#    import:
+#      - 'application_qa.yaml.backup'
+#      - 'application_prod.yaml.backup'
 #  profiles:
 ##    active:
 ##      - "qa"
 
 
-build:
-  version: '3.0'
-
-accounts:
-  message: "Welcome to CapferBank account related local APIs"
-  contactDetails:
-    name: "Carlos Pereira - Developer"
-    email: "capfer27@gmail.com"
-  onCallSupport:
-    - (555) 555-1234
-    - (555) 523-1345
+#build:
+#  version: '3.0'
+#
+#accounts:
+#  message: "Welcome to CapferBank account related local APIs"
+#  contactDetails:
+#    name: "Carlos Pereira - Developer"
+#    email: "capfer27@gmail.com"
+#  onCallSupport:
+#    - (555) 555-1234
+#    - (555) 523-1345
