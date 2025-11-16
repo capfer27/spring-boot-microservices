@@ -2,6 +2,7 @@ package com.capfer.cards.controller;
 
 import com.capfer.cards.constants.CardConstants;
 import com.capfer.cards.dto.CardDTO;
+import com.capfer.cards.dto.CardsContactInfoDTO;
 import com.capfer.cards.dto.ErrorResponseDTO;
 import com.capfer.cards.dto.ResponseDTO;
 import com.capfer.cards.service.ICardService;
@@ -14,6 +15,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +29,22 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping(path = "/api/cards", produces = {MediaType.APPLICATION_JSON_VALUE})
-@AllArgsConstructor
+//@AllArgsConstructor
 @Validated
 public class CardController {
 
     private final ICardService cardService;
+    private final Environment environment;
+    private final CardsContactInfoDTO cardsContactInfoDTO;
+
+    @Value(value = "${build.version}")
+    private String version;
+
+    public CardController(ICardService cardService, Environment environment, CardsContactInfoDTO cardsContactInfoDTO) {
+        this.cardService = cardService;
+        this.environment = environment;
+        this.cardsContactInfoDTO = cardsContactInfoDTO;
+    }
 
     @Operation(
             summary = "Create Card REST API",
@@ -155,6 +169,72 @@ public class CardController {
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(CardConstants.STATUS_OK_200, CardConstants.MESSAGE_OK));
+    }
+
+    @Operation(
+            summary = "Get Build Information",
+            description = "Get Build Information that is deployed into loans microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class))
+            )
+    })
+    @GetMapping(value = "/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(version);
+    }
+
+    @Operation(
+            summary = "Get Java Version Information",
+            description = "Get Java Version Information that is deployed into cards microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class))
+            )
+    })
+    @GetMapping(value = "/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(environment.getProperty("java.version"));
+    }
+
+    @Operation(
+            summary = "Get Contact Information",
+            description = "The Contact Information that can be used to reach out in case of any issues"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class))
+            )
+    })
+    @GetMapping(value = "/contact-info")
+    public ResponseEntity<CardsContactInfoDTO> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(cardsContactInfoDTO);
     }
 
 }
