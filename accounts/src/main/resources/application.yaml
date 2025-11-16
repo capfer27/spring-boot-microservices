@@ -22,9 +22,9 @@ spring:
     import:
       - 'application_qa.yaml'
       - 'application_prod.yaml'
-  profiles:
-    active:
-      - "prod"
+#  profiles:
+##    active:
+##      - "qa"
 
 
 build:
