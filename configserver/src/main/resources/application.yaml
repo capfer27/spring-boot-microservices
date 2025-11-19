@@ -2,15 +2,20 @@ spring:
  application:
   name: configserver
  profiles:
-   active: native
+#   active: native # used only to access config files from classpath, locally and so on so forth
+  active: git
  cloud:
    config:
 #     enabled: true
      server:
-       native:
-         search-locations:
-          - "classpath:/config"
-#          - "classpath:/config/cards"
-#          - "classpath:/config/loans"
+#       native:
+#         search-locations:
+#          - "classpath:/config"
+        git:
+          uri: "https://github.com/capfer27/microservices-accounts-app-config.git"
+          default-label: main # represents the default branch
+          timeout: 5 # waits only for 5 seconds to connect, otherwise throw an exception
+          clone-on-start: true # clone GitHub repo on start up
+          force-pull: true
 server:
   port: 8071
