@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: loans
+  profiles:
+    active: 'prod'
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -16,6 +18,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+  # Set up the url details of the config server
+  config:
+    import: "optional:configserver:http://localhost:8071/"
 
 # Backed up and no longer required
 #  config:

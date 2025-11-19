@@ -1,15 +1,16 @@
 spring:
  application:
-  name: configServer
+  name: configserver
  profiles:
    active: native
  cloud:
    config:
+#     enabled: true
      server:
        native:
          search-locations:
-          - "classpath:/config/accounts"
-          - "classpath:/config/cards"
-          - "classpath:/config/loans"
+          - "classpath:/config"
+#          - "classpath:/config/cards"
+#          - "classpath:/config/loans"
 server:
   port: 8071
