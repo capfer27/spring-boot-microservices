@@ -17,5 +17,9 @@ spring:
           timeout: 5 # waits only for 5 seconds to connect, otherwise throw an exception
           clone-on-start: true # clone GitHub repo on start up
           force-pull: true
+
+# Tells Spring Cloud Config to encrypt my configurations while processing them
+encrypt:
+  key: "45D81EC1EF61DF9AD8D3E5BB397F9"
 server:
   port: 8071
