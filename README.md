@@ -113,3 +113,15 @@ Steps to Refresh Config Files With Spring Actuator:
              exposure:
                 include: refresh           
  - Enable Refresh API from refresh endpoints: For instance localhost:8080/actuator/refresh
+
+Spring Cloud Bus - links nodes of a distributed system with a lightweight message broker (AMQP or Kafka).
+ - RabbitMQ docker installation command:
+   * docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4-management
+ - Expose the endpoint in the application.yaml file:
+     management:
+        endpoints:
+           web:
+            exposure:
+               include: busrefresh
+ - Do the config changes and refresh all of them that are registered with rabbitmq at once, via endpoint: 
+   * http://localhost:8080/actuator/busrefresh

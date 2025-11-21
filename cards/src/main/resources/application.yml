@@ -21,8 +21,13 @@ spring:
 
   config:
     import: "optional:configserver:http://localhost:8071/"
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
 
-# Enable the actuator to refresh the properties at run time
+# Enable the actuator to refresh the properties at runtime
 management:
   endpoints:
     web:
