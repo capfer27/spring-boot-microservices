@@ -103,3 +103,13 @@ Spring Profiles:
    * -Dspring.profiles.active=prod -Dbuild.version=1.1
  - Configure spring profiles via Environment Variables
    * SPRING.PROFILES.ACTIVE=prod;BUILD.VERSION=1.4;
+
+Steps to Refresh Config Files With Spring Actuator:
+ - Add Spring Boot Actuator Dependency In the config client dependencies
+ - Expose the endpoint in the application.yaml file: 
+    management:
+        endpoints:
+            web:
+             exposure:
+                include: refresh           
+ - Enable Refresh API from refresh endpoints: For instance localhost:8080/actuator/refresh
