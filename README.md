@@ -153,4 +153,10 @@ Liveness and Readiness
 - Generating images with jib locally and push them to docker hub
   * gradle jibDockerBuild
   * docker image push docker.io/caito25/accounts:v0.0.1  
+
+- Installing and Running hookdeck-cli with docker
+  * step 1: docker pull hookdeck/hookdeck-cli  
+  * step 2: docker run --rm -it hookdeck/hookdeck-cli version
+  * step 3: hookdeck login --cli-key 38fmya3ek0oaebv8rnmw14l1t9hqzxec4nydyua86r7ejuin0u
+  * step 4: hookdeck listen 8071 Source --cli-path /monitor
    

@@ -1,10 +1,10 @@
 services:
   rabbit:
-    image: rabbitmq:4-management
+    image: rabbitmq:latest
     hostname: rabbitmq
     ports:
-      - '5672:5672'
-      - '15672:15672'
+      - "5672:5672"
+      - "15672:15672"
     healthcheck:
       test: rabbitmq-diagnostics check_port_connectivity
       interval: 10s
@@ -15,11 +15,11 @@ services:
       file: common-config.yaml
       service: network-deploy-service
 
-  config-server:
-    image: "caito25/configserver:v0.0.1"
-    container_name: config-server-ms
+  configserver:
+    image: "caito25/configserver:v0.1.1"
+    container_name: configserver-ms
     ports:
-      - '8071:8071'
+      - "8071:8071"
     depends_on:
       rabbit:
         condition: service_healthy
@@ -34,38 +34,47 @@ services:
       service: microservice-base-config
 
   accounts:
-    image: "caito25/accounts:v0.0.1"
+    image: "caito25/accounts:v0.1.1"
     container_name: accounts-ms
     ports:
-      - '8080:8080'
+      - "8080:8080"
+    depends_on:
+      configserver:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "accounts"
     extends:
       file: common-config.yaml
       service: microservice-configserver-config
 
-  cards:
-   image: "caito25/cards:v0.0.1"
-   container_name: cards-ms
-   ports:
-     - '9000:9000'
-   environment:
-     SPRING_APPLICATION_NAME: "cards"
-   extends:
-     file: common-config.yaml
-     service: microservice-configserver-config
-
   loans:
-   image: "caito25/loans:v0.0.1"
-   container_name: loans-ms
-   ports:
-     - '8090:8090'
-   environment:
-    SPRING_APPLICATION_NAME: "loans"
-   extends:
-     file: common-config.yaml
-     service: microservice-configserver-config
+    image: "caito25/loans:v0.1.1"
+    container_name: loans-ms
+    ports:
+      - "8090:8090"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+    extends:
+      file: common-config.yaml
+      service: microservice-configserver-config
+
+  cards:
+    image: "caito25/cards:v0.1.1"
+    container_name: cards-ms
+    ports:
+      - "9000:9000"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+    extends:
+      file: common-config.yaml
+      service: microservice-configserver-config
 
 networks:
   capferbank:
-    driver: 'bridge'
+    driver: "bridge"
