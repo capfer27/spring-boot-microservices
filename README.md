@@ -133,3 +133,18 @@ Spring Cloud Bus - links nodes of a distributed system with a lightweight messag
 - Login and start the CLI with those commands: hookdeck login --cli-key 2e4wkp8n48zocgmpgvxlyvaqj4k80g8qqubixrckoa1va6asnu
 - hookdeck listen [the port of config server] Source: hookdeck listen 8071 Source --cli-path /monitor
 - hookdeck logout - in case of login issues
+
+Liveness and Readiness
+ - A liveness probe sends a signal that the container or application is either alive (passing) or dead (failing).
+ - A readiness probe is used to know whether the container or an app that is being probed is ready to start
+   receiving network traffic.
+ - In Spring Boot applications, the actuator gathers the "Liveness" and "Readiness" information from the ApplicationAvailability
+   interface and uses that information in dedicated health indicators: LivenessStateHealthIndicator and ReadinessStateHealthIndicator.
+   These indicators are also shown on the global health indicator - "actuator/health". They are also exposed as separate HTTP Probes
+   by using health groups: 
+    * "actuator/health/liveness"
+    * "actuator/health/readiness"
+    * http://localhost:8071/actuator/health
+    * http://localhost:8071/actuator/health/liveness
+    * http://localhost:8071/actuator/health/readiness
+   
