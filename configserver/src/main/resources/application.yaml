@@ -1,6 +1,6 @@
 spring:
  application:
-  name: configserver
+  name: "configserver"
  profiles:
 #   active: native # used only to access config files from classpath, locally and so on so forth
   active: git
