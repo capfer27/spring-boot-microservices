@@ -21,9 +21,11 @@ Docker Fundamentals
 
 How to generate docker images
  - There several ways to generate docker images:
-   Using the traditional Dockerfile
-   Using Buildpacks
-   Using Google Jib
+   * Using the traditional Dockerfile
+   * Using Buildpacks
+   * Using Google Jib
+   * gradle jib OR 
+   * gradle jibDockerBuild
 
 Running the jar file command:
  - java -jar build/libs/accounts-0.0.1-SNAPSHOT.jar
@@ -147,4 +149,8 @@ Liveness and Readiness
     * http://localhost:8071/actuator/health
     * http://localhost:8071/actuator/health/liveness
     * http://localhost:8071/actuator/health/readiness
+ 
+- Generating images with jib locally and push them to docker hub
+  * gradle jibDockerBuild
+  * docker image push docker.io/caito25/accounts:v0.0.1  
    
