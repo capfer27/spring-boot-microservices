@@ -125,3 +125,11 @@ Spring Cloud Bus - links nodes of a distributed system with a lightweight messag
                include: busrefresh
  - Do the config changes and refresh all of them that are registered with rabbitmq at once, via endpoint: 
    * http://localhost:8080/actuator/busrefresh
+
+- Spring Cloud Config Monitor 
+  * When changes occur on GitHub fire a webhook to handle data change events on Spring Bus to refresh everything ...
+- Install the hookdeck from website https://console.hookdeck.com/
+- brew install hookdeck/hookdeck/hookdeck
+- Login and start the CLI with those commands: hookdeck login --cli-key 2e4wkp8n48zocgmpgvxlyvaqj4k80g8qqubixrckoa1va6asnu
+- hookdeck listen [the port of config server] Source: hookdeck listen 8071 Source --cli-path /monitor
+- hookdeck logout - in case of login issues

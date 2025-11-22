@@ -18,6 +18,18 @@ spring:
           clone-on-start: true # clone GitHub repo on start up
           force-pull: true
 
+   rabbitmq:
+     host: "localhost"
+     port: 5672
+     username: "guest"
+     password: "guest"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # expose all endpoints including the monitor one: http://localhost:8071/monitor
+
 # Tells Spring Cloud Config to encrypt my configurations while processing them
 encrypt:
   key: "45D81EC1EF61DF9AD8D3E5BB397F9"
