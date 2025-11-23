@@ -1,14 +1,14 @@
-CREATE TABLE IF NOT EXISTS `cards` (
-  `card_id` BIGSERIAL NOT NULL,
-  `mobile_number` VARCHAR(15) UNIQUE NOT NULL,
-  `card_number` VARCHAR(100) NOT NULL,
-  `card_type` VARCHAR(100) NOT NULL,
-  `total_limit` INTEGER NOT NULL,
-  `amount_used` INTEGER NOT NULL,
-  `available_amount` INTEGER NOT NULL,
-  `created_at` DATE NOT NULL,
-  `created_by` VARCHAR(20) NOT NULL,
-  `updated_at` DATE DEFAULT NULL,
-  `updated_by` VARCHAR(20) DEFAULT NULL,
-  PRIMARY KEY (`card_id`)
+CREATE TABLE IF NOT EXISTS cards (
+  card_id BIGSERIAL NOT NULL,
+  mobile_number VARCHAR(15) UNIQUE NOT NULL,
+  card_number VARCHAR(100) NOT NULL,
+  card_type VARCHAR(100) NOT NULL,
+  total_limit INTEGER NOT NULL,
+  amount_used INTEGER NOT NULL,
+  available_amount INTEGER NOT NULL,
+  created_at DATE NOT NULL,
+  created_by VARCHAR(20) NOT NULL,
+  updated_at DATE DEFAULT NULL,
+  updated_by VARCHAR(20) DEFAULT NULL,
+  PRIMARY KEY (card_id)
 );

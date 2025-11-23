@@ -6,27 +6,34 @@ spring:
   profiles:
     active: 'prod'
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
-  h2:
-    console:
-      enabled: true
+    url: jdbc:postgresql://localhost:5434/pg-loans-db
+    username: postgres
+    password: postgres
+#    url: jdbc:h2:mem:testdb
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password: ''
+#  h2:
+#    console:
+#      enabled: true
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none # We don't want to let hibernate create the database tables when the app starts
+      open-in-view: false # changes how database sessions are handled in regard to open session in view pattern.
+  sql:
+    init:
+      mode: always
     show-sql: true
 
   # Set up the url details of the config server
   config:
     import: "optional:configserver:http://localhost:8071/"
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
 
 # Enable the actuator to refresh the properties at run time
 management:
