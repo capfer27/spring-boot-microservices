@@ -159,4 +159,10 @@ Liveness and Readiness
   * step 2: docker run --rm -it hookdeck/hookdeck-cli version
   * step 3: hookdeck login --cli-key 38fmya3ek0oaebv8rnmw14l1t9hqzxec4nydyua86r7ejuin0u
   * step 4: hookdeck listen 8071 Source --cli-path /monitor
+
+ - PostgreSQL Containerization
+   * docker network create capferbank
+   * docker run -p 5432:5432 --name accounts-db --network capferbank -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pg-accounts-db -d postgres
+   * docker run -p 5433:5432 --name cards-db --network capferbank -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pg-cards-db -d postgres
+   * docker run -p 5434:5432 --name loans-db --network capferbank -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pg-loans-db -d postgres
    
