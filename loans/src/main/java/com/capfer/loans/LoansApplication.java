@@ -16,8 +16,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableConfigurationProperties(value = LoansContactInfoDTO.class)
 @OpenAPIDefinition(
         info = @Info(
-                title = "Cards microservice REST API Documentation",
-                description = "CapferBank Cards microservice REST API Documentation",
+                title = "Loans microservice REST API Documentation",
+                description = "CapferBank Loans microservice REST API Documentation",
                 version = "v1",
                 contact = @Contact(
                         name = "Карлуш Перейра Фернандеш",
@@ -30,7 +30,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
                 )
         ),
         externalDocs = @ExternalDocumentation(
-                description = "CapferBank Cards microservice REST API Documentation",
+                description = "CapferBank Loans microservice REST API Documentation",
                 url = "https://capfer-promath.com/swagger-ui.com.html"
         )
 )
