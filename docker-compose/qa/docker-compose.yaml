@@ -76,7 +76,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "loans"
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://loans-db-service:5434/pg-loans-db"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://loans-db-service:5432/pg-loans-db"
     extends:
       file: common-config.yaml
       service: microservice-configserver-config
@@ -93,7 +93,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "cards"
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://cards-db-service:5433/pg-cards-db"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://cards-db-service:5432/pg-cards-db"
     extends:
       file: common-config.yaml
       service: microservice-configserver-config

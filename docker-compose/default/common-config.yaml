@@ -7,14 +7,15 @@ services:
     extends:
       service: network-deploy-service
     image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER" ]
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 10s       # How often to run the check
       timeout: 5s         # Max time for the check to pass
       retries: 10         # How many times to retry before marking as 'unhealthy'
       start_period: 10s   # Initial grace period for the container to start up
-    environment:
-      POSTGRES_PASSWORD: postgres
 
   microservice-base-config:
     extends:
