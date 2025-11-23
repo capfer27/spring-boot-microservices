@@ -1,168 +1,78 @@
-The Strangler Fig Pattern
- - The strangler fig pattern is a software design pattern used to gradually replace
-   or refactor a legacy system with a new system, piece by piece, without disrupting the 
-   existing functionality. This pattern gets its name from the way a strangler fig plant
-   grows around an existing tree, slowly replacing it until the original tree is no longer
-   needed.
+В этом репозитории собраны несколько проектов, над которыми я работаю,
+пока ищу работу на позицию Java-разработчика.
+Спасибо, что нашли время ознакомиться с ними. Приятного просмотра!
 
-   takeaways:
-   - When to use The Strangler Fig Pattern:
-     When you need to modernize a large or complex legacy system.
-     When you want to avoid the risk associated with a complete system rewrite or "big bang" migration.
-     When the legacy system needs to remain operational during the transition to the new system.
+**Микросервис банковского счёта** — бэкенд api на Java и Spring Boot с использованием современных практик разработки и контейнеризации.
 
+🛠 Стек Технологий
 
-Docker Fundamentals
- - A docker container is a loosely isolated environment that allows us to build and run
-   software packages. These software packages include the code and all dependencies to run
-   the applications quickly and reliably on any computing environment. We call these packages
-   as container images.
+Основные технологии
 
+* Язык: Java 21
+* Фреймворк: Spring Boot 3.x, Spring Cloud (Starter Bus AMQP, Cloud Config Monitor)
+* Контейнеризация: Docker, Docker Compose
+* Google Container Tools (jib) - для создания оптимизированных образов Docker и OCI для Java приложений 
+* Hookdeck: Для тестирования вебхука GitHub.
+* Базы данных: PostgreSQL
+* ORM: Spring Data JPA (Hibernate)
+* API Документация: OpenAPI 3 (Swagger UI)
+* Spring Cloud Eureka Server - запланировано
+* Spring Cloud Gateway - запланировано
+* Grafana, Open Telemetry, Prometheus - запланировано
+* Аутентификация: OAuth - запланировано
+* Кеширование: Spring Data Redis - запланировано
+* Kubernetes orchestration - запланировано
+* Helm - запланировано
 
-How to generate docker images
- - There several ways to generate docker images:
-   * Using the traditional Dockerfile
-   * Using Buildpacks
-   * Using Google Jib
-   * gradle jib OR 
-   * gradle jibDockerBuild
+Тестирование
 
-Running the jar file command:
- - java -jar build/libs/accounts-0.0.1-SNAPSHOT.jar
+* JUnit 5, Mockito - запланировано
+* Spring MVC Test - запланировано
+* Testcontainers (интеграционное тестирование БД) - запланировано
 
-Building docker images commands
- - docker build . -t caito21/accounts:v0.0.1  ( -t stands for tag)
- - docker inspect image 15727fc9fd1c (inspect the image)
+Сервисы
 
-Build or Start docker container based on the image
- - docker run -p 8080:8080 caito21/accounts:v0.0.1
+* Account Service - управление банковским счетом
+* Cards Service - Управление картами.
+* Loans Service - Управление кредитами.
+* Config Service - Управление конфигурации
 
-Port Mapping | Port Forwarding | Port Publishing
- - docker run -p 8080:8080
+🚀 Запуск проекта
 
-Buildpack use something called builders.
-The builders are design to analise and build the application.
- - Buildpacks set
- - Stack
- - Lifecycle manager - assemble everything into a file (container image)
-Buildpacks Lifecycle:
- - Detect - detect language or framework
- - Build - Fetch dependencies, compile code and configure runtime.
+Предварительные требования
 
-The most common docker commands:
- - docker images -> list all docker images present in the Docker Server
- - docker ps -> display or show all running containers
- - docker ps -a -> show all containers including running and stopped
- - docker image rm <image id>
- - docker image inspect <image id> -> display detailed imaged information
- - docker build . -t <image name> -> generate docker image based on Dockerfile settings
- - docker run -p [hostPort:ContainerPort] <image name> -> start a docker container based on a given image
- - docker container start <container id>
- - docker container stop <container id>
- - docker container pause <container id>
- - docker container unpause <container id>
- - docker container kill <container id>
- - docker container inspect <container id>
- - docker container restart <container id>
- - docker container logs <container id>
- - docker container logs -f <container id>
- - docker rm <container id>
- - docker container prune -> remove all stopped containers
- - docker image push [container_registry/username:tag] -> to push an image from a container registry
- - docker image pull [container_registry/username:tag] -> to pull an image from a container registry
- - docker image prune -> to remove all unused images
- - docker container stats
- - docker system prune [--all] -> remove stopped containers, dangling images, and unused networks, volumes and cache.
- - docker rmi <image id>
- - docker login -u <username>
- - docker logout -> log out from docker hub container registry
- - docker history <image name>
- - docker exec -it <container id> sh
- - docker compose up [-d]
- - docker compose down
+* JDK 21 (17+ должно быть достаточно - но не проверил)
+* Docker 20.10+
+* Docker Compose 2.4+
+* Gradle 8.14+
+* GIT 2.51+
 
-The 15-Factor methodology
- 1. One codebase, one application
- 2. API First
- 3. Dependency Management
- 4. Design, Build, Release, Run.
- 5. Configuration, Credentials & Code
- 6. Logs
- 7. Disposability
- 8. Backing Services
- 9. Environment Parity 
-10. Administrative Processes
-11. Port Binding
-12. Stateless Process
-13. Concurrency
-14. Telemetry
-15. Authentication & Authorization
+**Локальный запуск через Docker Compose**
+1. Клонируйте репозиторий:
+   `git clone https://github.com/capfer27/spring-boot-microservices.git`
+2. `cd docker-compose && prod `
+3. Запустите все сервисы:
+   `docker-compose up -d --build`
 
-Spring Profiles:
- - Set up profiles via command line arguments (Program arguments)
-   *  --spring.profiles.active=prod --build.version=1.1
- - Configure spring profiles via VM Options
-   * -Dspring.profiles.active=prod -Dbuild.version=1.1
- - Configure spring profiles via Environment Variables
-   * SPRING.PROFILES.ACTIVE=prod;BUILD.VERSION=1.4;
+   - Эта команда создаст общий контейнер PostgreSQL для всех сервисов и запустит все микросервисы в отдельных контейнерах:
+        * Accounts Service
+        * Cards Service
+        * Loans Service
+        * Config Service
 
-Steps to Refresh Config Files With Spring Actuator:
- - Add Spring Boot Actuator Dependency In the config client dependencies
- - Expose the endpoint in the application.yaml file: 
-    management:
-        endpoints:
-            web:
-             exposure:
-                include: refresh           
- - Enable Refresh API from refresh endpoints: For instance localhost:8080/actuator/refresh
+4. Остановка сервисов: `docker-compose down`
 
-Spring Cloud Bus - links nodes of a distributed system with a lightweight message broker (AMQP or Kafka).
- - RabbitMQ docker installation command:
-   * docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4-management
- - Expose the endpoint in the application.yaml file:
-     management:
-        endpoints:
-           web:
-            exposure:
-               include: busrefresh
- - Do the config changes and refresh all of them that are registered with rabbitmq at once, via endpoint: 
-   * http://localhost:8080/actuator/busrefresh
+5. В SWAGGER UI сервисы будут доступны по адресам:
+     - Cards microservice URI: http://localhost:9000/swagger-ui/index.html#/
+     - Accounts microservice URI: http://localhost:8080/swagger-ui/index.html#/
+     - Loans microservice URI: http://localhost:8090/swagger-ui/index.html#/
 
-- Spring Cloud Config Monitor 
-  * When changes occur on GitHub fire a webhook to handle data change events on Spring Bus to refresh everything ...
-- Install the hookdeck from website https://console.hookdeck.com/
-- brew install hookdeck/hookdeck/hookdeck
-- Login and start the CLI with those commands: hookdeck login --cli-key 2e4wkp8n48zocgmpgvxlyvaqj4k80g8qqubixrckoa1va6asnu
-- hookdeck listen [the port of config server] Source: hookdeck listen 8071 Source --cli-path /monitor
-- hookdeck logout - in case of login issues
+**Скриншоты Rest UIs**
+ - Cards:
+  ![img.png](img.png)
 
-Liveness and Readiness
- - A liveness probe sends a signal that the container or application is either alive (passing) or dead (failing).
- - A readiness probe is used to know whether the container or an app that is being probed is ready to start
-   receiving network traffic.
- - In Spring Boot applications, the actuator gathers the "Liveness" and "Readiness" information from the ApplicationAvailability
-   interface and uses that information in dedicated health indicators: LivenessStateHealthIndicator and ReadinessStateHealthIndicator.
-   These indicators are also shown on the global health indicator - "actuator/health". They are also exposed as separate HTTP Probes
-   by using health groups: 
-    * "actuator/health/liveness"
-    * "actuator/health/readiness"
-    * http://localhost:8071/actuator/health
-    * http://localhost:8071/actuator/health/liveness
-    * http://localhost:8071/actuator/health/readiness
- 
-- Generating images with jib locally and push them to docker hub
-  * gradle jibDockerBuild
-  * docker image push docker.io/caito25/accounts:v0.0.1  
+ - Accounts:
+  ![img_1.png](img_1.png)  
 
-- Installing and Running hookdeck-cli with docker
-  * step 1: docker pull hookdeck/hookdeck-cli  
-  * step 2: docker run --rm -it hookdeck/hookdeck-cli version
-  * step 3: hookdeck login --cli-key 38fmya3ek0oaebv8rnmw14l1t9hqzxec4nydyua86r7ejuin0u
-  * step 4: hookdeck listen 8071 Source --cli-path /monitor
-
- - PostgreSQL Containerization
-   * docker network create capferbank
-   * docker run -p 5432:5432 --name accounts-db --network capferbank -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pg-accounts-db -d postgres
-   * docker run -p 5433:5432 --name cards-db --network capferbank -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pg-cards-db -d postgres
-   * docker run -p 5434:5432 --name loans-db --network capferbank -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pg-loans-db -d postgres
-   
+ - Loans: 
+  ![img_2.png](img_2.png)  
