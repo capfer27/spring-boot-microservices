@@ -3,6 +3,19 @@ services:
     networks:
       - capferbank
 
+  microservice-db-config:
+    extends:
+      service: network-deploy-service
+    image: postgres:latest
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER" ]
+      interval: 10s       # How often to run the check
+      timeout: 5s         # Max time for the check to pass
+      retries: 10         # How many times to retry before marking as 'unhealthy'
+      start_period: 10s   # Initial grace period for the container to start up
+    environment:
+      POSTGRES_PASSWORD: postgres
+
   microservice-base-config:
     extends:
       service: network-deploy-service
@@ -10,15 +23,12 @@ services:
       resources:
         limits:
           memory: 700m
-    environment:
-      SPRING_RABBITMQ_HOST: "rabbit"
 
   microservice-configserver-config:
     extends:
       service: microservice-base-config
-#    depends_on: # Note: depends_on is no longer supported in new versions of spring boot.
-#      config-server:
-#        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: qa
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres

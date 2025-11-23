@@ -1,77 +1,118 @@
 services:
-  rabbit:
-    image: rabbitmq:latest
-    hostname: rabbitmq
+#  rabbit:
+#    image: rabbitmq:latest
+#    hostname: rabbitmq
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    healthcheck:
+#      test: rabbitmq-diagnostics check_port_connectivity
+#      interval: 10s
+#      timeout: 5s
+#      retries: 10
+#      start_period: 5s
+#    extends:
+#      file: common-config.yaml
+#      service: network-deploy-service
+
+  accounts-db-service:
+    container_name: accounts-db
     ports:
-      - "5672:5672"
-      - "15672:15672"
-    healthcheck:
-      test: rabbitmq-diagnostics check_port_connectivity
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 5s
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: pg-accounts-db
     extends:
       file: common-config.yaml
-      service: network-deploy-service
+      service: microservice-db-config
+
+  loans-db-service:
+    container_name: loans-db
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: pg-loans-db
+    extends:
+      file: common-config.yaml
+      service: microservice-db-config
+
+  cards-db-service:
+    container_name: cards-db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: pg-cards-db
+    extends:
+      file: common-config.yaml
+      service: microservice-db-config
 
   configserver:
-    image: "caito25/configserver:v0.1.1"
+    image: "caito25/configserver:v1.1.2"
     container_name: configserver-ms
     ports:
       - "8071:8071"
-    depends_on:
-      rabbit:
-        condition: service_healthy
+#    depends_on:
+#      rabbit:
+#        condition: service_healthy
     healthcheck:
-#      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
       test: "wget --quiet --tries=1 --spider localhost:8071/actuator/health/readiness || exit 1"
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 10s # start after 10s, retries after 10s with an interval of 10s and wait maximum 5s to get the response back.
+      start_period: 10s
     extends:
       file: common-config.yaml
       service: microservice-base-config
 
   accounts:
-    image: "caito25/accounts:v0.1.1"
+    image: "caito25/accounts:v1.1.2"
     container_name: accounts-ms
     ports:
       - "8080:8080"
     depends_on:
+      accounts-db-service:
+        condition: service_healthy
       configserver:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "accounts"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://accounts-db-service:5432/pg-accounts-db"
     extends:
       file: common-config.yaml
       service: microservice-configserver-config
 
   loans:
-    image: "caito25/loans:v0.1.1"
+    image: "caito25/loans:v1.1.2"
     container_name: loans-ms
     ports:
       - "8090:8090"
     depends_on:
+      loans-db-service:
+        condition: service_healthy
       configserver:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "loans"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://loans-db-service:5434/pg-loans-db"
     extends:
       file: common-config.yaml
       service: microservice-configserver-config
 
   cards:
-    image: "caito25/cards:v0.1.1"
+    image: "caito25/cards:v1.1.2"
     container_name: cards-ms
     ports:
       - "9000:9000"
     depends_on:
+      cards-db-service:
+        condition: service_healthy
       configserver:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "cards"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://cards-db-service:5433/pg-cards-db"
     extends:
       file: common-config.yaml
       service: microservice-configserver-config
