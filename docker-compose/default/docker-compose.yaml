@@ -46,7 +46,7 @@ services:
       service: microservice-db-config
 
   configserver:
-    image: "caito25/configserver:v1.1.2"
+    image: "caito25/configserver:v1.1.3"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -64,7 +64,7 @@ services:
       service: microservice-base-config
 
   accounts:
-    image: "caito25/accounts:v1.1.2"
+    image: "caito25/accounts:v1.1.3"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -81,7 +81,7 @@ services:
       service: microservice-configserver-config
 
   loans:
-    image: "caito25/loans:v1.1.2"
+    image: "caito25/loans:v1.1.3"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -98,7 +98,7 @@ services:
       service: microservice-configserver-config
 
   cards:
-    image: "caito25/cards:v1.1.2"
+    image: "caito25/cards:v1.1.3"
     container_name: cards-ms
     ports:
       - "9000:9000"
