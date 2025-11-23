@@ -18,11 +18,11 @@ spring:
           clone-on-start: true # clone GitHub repo on start up
           force-pull: true
 
-   rabbitmq:
-     host: "localhost"
-     port: 5672
-     username: "guest"
-     password: "guest"
+#   rabbitmq:
+#     host: "localhost"
+#     port: 5672
+#     username: "guest"
+#     password: "guest"
 
 management:
   endpoints:
