@@ -21,6 +21,7 @@
 * Grafana, Open Telemetry, Prometheus - запланировано
 * Аутентификация: OAuth - запланировано
 * Кеширование: Spring Data Redis - запланировано
+* CI/CD
 * Kubernetes orchestration - запланировано
 * Helm - запланировано
 
