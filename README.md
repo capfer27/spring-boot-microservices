@@ -10,13 +10,13 @@
 
 * Язык: Java 21
 * Фреймворк: Spring Boot 3.x, Spring Cloud (Starter Bus AMQP, Cloud Config Monitor)
+* Spring Cloud Eureka Server - Для обнаружения и регистрации сервисов
 * Контейнеризация: Docker, Docker Compose
 * Google Container Tools (jib) - для создания оптимизированных образов Docker и OCI для Java приложений 
 * Hookdeck: Для тестирования вебхука GitHub.
 * Базы данных: PostgreSQL
 * ORM: Spring Data JPA (Hibernate)
 * API Документация: OpenAPI 3 (Swagger UI)
-* Spring Cloud Eureka Server - запланировано
 * Spring Cloud Gateway - запланировано
 * Grafana, Open Telemetry, Prometheus - запланировано
 * Аутентификация: OAuth - запланировано
