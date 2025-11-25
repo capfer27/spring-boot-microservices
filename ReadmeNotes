@@ -197,3 +197,6 @@ Spring Cloud Bus - links nodes of a distributed system with a lightweight messag
    locate each other in a network. This includes,
     * A central server (or servers) that maintain a global view of address.
     * Client / Microservices that connect to the central server to register their address when they start & ready.
+
+ - Eureka Server Dashboard: http://localhost:8070/
+ - Eureka Server Config Server URL: http://localhost:8071/eurekaserver/default
