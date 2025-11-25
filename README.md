@@ -18,7 +18,7 @@
 * Базы данных: PostgreSQL
 * ORM: Spring Data JPA (Hibernate)
 * API Документация: OpenAPI 3 (Swagger UI)
-* Kafka - запланировано
+* Kafka - запланировано (_Я узнал немного о кафке в этом проекте:_ https://github.com/capfer27/spring-book-kafka-shop-api)
 * Spring Cloud Gateway - запланировано
 * Grafana, Open Telemetry, Prometheus - запланировано
 * Аутентификация: OAuth - запланировано
