@@ -61,6 +61,13 @@ eureka:
     registerWithEureka: true
     serviceUrl:
       defaultZone: http://localhost:8070/eureka/
+# Useful information to display in eureka dashboard when multiple services are connected with it.
+# It'll also be displayed as part of actuator info url.
+info:
+  app:
+    name: "cards"
+    description: "Capfer Bank Cards application"
+    version: "1.0.0"
 
 # Backed up and no longer required
 #  config:
