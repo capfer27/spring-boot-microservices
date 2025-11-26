@@ -209,3 +209,5 @@ Spring Cloud Bus - links nodes of a distributed system with a lightweight messag
   accounts: http://localhost:8080/actuator/shutdown
   loans: http://localhost:8090/actuator/shutdown
   cards: http://localhost:9000/actuator/shutdown
+
+The heartbeats are sent to the eureka sever every 30 seconds after the services are started.
