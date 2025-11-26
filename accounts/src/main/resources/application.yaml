@@ -41,6 +41,36 @@ management:
     web:
       exposure:
         include: "*" # enable all available endpoints inside the actuator
+  endpoint:
+    shutdown:
+#      enabled: true # this property is deprecated, therefore I use access: "unrestricted" instead
+      access: "unrestricted" # to gracefully stops the accounts service
+  info:
+    env:
+      enabled: true
+
+# This setup is no longer required. TODO: Remove it.
+endpoints:
+  shutdown:
+    enabled: true
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+# Useful information to display in eureka dashboard when multiple services are connected with it.
+# It'll also be displayed as part of actuator info url.
+info:
+  app:
+    name: "accounts"
+    description: "Capfer Bank Account application"
+    version: "1.0.0"
+
 
 # Backed up and no longer required
 #  config:
