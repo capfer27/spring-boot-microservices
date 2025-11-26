@@ -204,3 +204,8 @@ Spring Cloud Bus - links nodes of a distributed system with a lightweight messag
    * accounts app url: http://localhost:8070/eureka/apps/accounts
    * cards app url: http://localhost:8070/eureka/apps/cards
    * loans app url: http://localhost:8070/eureka/apps/loans
+
+ The Spring Actuator Shutdown URL for microservices:
+  accounts: http://localhost:8080/actuator/shutdown
+  loans: http://localhost:8090/actuator/shutdown
+  cards: http://localhost:9000/actuator/shutdown
