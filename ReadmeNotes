@@ -199,4 +199,5 @@ Spring Cloud Bus - links nodes of a distributed system with a lightweight messag
     * Client / Microservices that connect to the central server to register their address when they start & ready.
 
  - Eureka Server Dashboard: http://localhost:8070/
- - Eureka Server Config Server URL: http://localhost:8071/eurekaserver/default
+ - Eureka Server (Config Server URL): http://localhost:8071/eurekaserver/default
+ - Eureka Server All Apps urls: http://localhost:8070/eureka/apps
