@@ -14,7 +14,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -31,7 +30,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api/cards", produces = {MediaType.APPLICATION_JSON_VALUE})
 //@AllArgsConstructor
 @Validated
-public class CardController {
+public class CardsController {
 
     private final ICardService cardService;
     private final Environment environment;
@@ -40,7 +39,7 @@ public class CardController {
     @Value(value = "${build.version}")
     private String version;
 
-    public CardController(ICardService cardService, Environment environment, CardsContactInfoDTO cardsContactInfoDTO) {
+    public CardsController(ICardService cardService, Environment environment, CardsContactInfoDTO cardsContactInfoDTO) {
         this.cardService = cardService;
         this.environment = environment;
         this.cardsContactInfoDTO = cardsContactInfoDTO;

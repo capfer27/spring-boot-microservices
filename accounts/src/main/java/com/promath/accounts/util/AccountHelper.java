@@ -7,6 +7,8 @@ import com.promath.accounts.entity.Customer;
 import java.util.Random;
 
 public final class AccountHelper {
+    public static final String TEN_DIGITS_PATTERN = "(^$|[0-9]{10})";
+    public static final String TWELVE_DIGITS_PATTERN = "(^$|[0-9]{12})";
 
     private static final int MAX_BOUND = 900_000_000;
     private static final long MIN_BOUND = 1_000_000_000L;
