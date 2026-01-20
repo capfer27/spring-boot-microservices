@@ -1,8 +1,12 @@
 package com.promath.accounts.util;
 
 import com.promath.accounts.constants.AccountConstants;
+import com.promath.accounts.dto.CustomerAccountInfoDTO;
 import com.promath.accounts.entity.Account;
 import com.promath.accounts.entity.Customer;
+import com.promath.accounts.exception.ResourceNotFoundException;
+import com.promath.accounts.repository.AccountRepository;
+import com.promath.accounts.repository.CustomerRepository;
 
 import java.util.Random;
 
@@ -34,5 +38,33 @@ public final class AccountHelper {
         String formatted = String.format("%s not found with the given input data %s : '%s'",
                 resourceName, fieldName, fieldValue);
         return formatted;
+    }
+
+    public static CustomerAccountInfoDTO getCustomerAccountInfo(
+            String mobileNumber,
+            CustomerRepository customerRepository,
+            AccountRepository accountRepository
+    ) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> {
+                    String errorMessage = AccountHelper.constructErrorMessage(
+                            "Customer",
+                            "mobileNumber",
+                            mobileNumber
+                    );
+                    return new ResourceNotFoundException(errorMessage);
+                });
+
+        Account account = accountRepository.findByCustomerId(customer.getCustomerId())
+                .orElseThrow(() -> {
+                    String errorMessage = AccountHelper.constructErrorMessage(
+                            "Account",
+                            "customerId",
+                            customer.getCustomerId().toString()
+                    );
+                    return new ResourceNotFoundException(errorMessage);
+                });
+        CustomerAccountInfoDTO result = new CustomerAccountInfoDTO(customer, account);
+        return result;
     }
 }

@@ -1,6 +1,7 @@
 package com.promath.accounts.service;
 
 import com.promath.accounts.dto.AccountDTO;
+import com.promath.accounts.dto.CustomerAccountInfoDTO;
 import com.promath.accounts.dto.CustomerDTO;
 import com.promath.accounts.entity.Account;
 import com.promath.accounts.entity.Customer;
@@ -41,28 +42,14 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public CustomerDTO getAccountDetails(String mobileNumber) {
-        Customer customer = customerRepository.findByMobileNumber(mobileNumber)
-                .orElseThrow(() -> {
-                    String errorMessage = AccountHelper.constructErrorMessage(
-                            "Customer",
-                            "mobileNumber",
-                            mobileNumber
-                    );
-                    return new ResourceNotFoundException(errorMessage);
-                });
+        CustomerAccountInfoDTO result = AccountHelper.getCustomerAccountInfo(
+                mobileNumber,
+                customerRepository,
+                accountRepository
+        );
 
-        Account account = accountRepository.findByCustomerId(customer.getCustomerId())
-                .orElseThrow(() -> {
-                    String errorMessage = AccountHelper.constructErrorMessage(
-                            "Account",
-                            "customerId",
-                            customer.getCustomerId().toString()
-                    );
-                    return new ResourceNotFoundException(errorMessage);
-                });
-
-        AccountDTO accountDTO = AccountMapper.mapToAccountDTO(account);
-        CustomerDTO customerDTO = CustomerMapper.mapToCustomerDTO(customer);
+        AccountDTO accountDTO = AccountMapper.mapToAccountDTO(result.account());
+        CustomerDTO customerDTO = CustomerMapper.mapToCustomerDTO(result.customer());
         customerDTO.setAccountDTO(accountDTO);
 
         return customerDTO;

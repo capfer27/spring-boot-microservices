@@ -70,6 +70,6 @@ jib {
         }
     }
     to {
-        image = "caito25/${project.name}:v1.1.3"
+        image = "caito25/${project.name}:v1.1.4"
     }
 }

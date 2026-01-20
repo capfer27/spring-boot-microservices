@@ -60,7 +60,14 @@ public class AccountsController {
             summary = "FETCH ACCOUNT REST API",
             description = "REST API to fetch Customer and Account based on a mobile number"
     )
-    @ApiResponse(responseCode = "200", description = "HTTP Status OK")
+    @ApiResponses({
+         @ApiResponse(responseCode = "200", description = "HTTP Status OK"),
+         @ApiResponse(
+                 responseCode = "500",
+                 description = "HTTP Status Internal Server Error",
+                 content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class))
+         )
+    })
     @GetMapping(value = "/details")
     public ResponseEntity<CustomerDTO> fetchAccountDetails(
             @RequestParam

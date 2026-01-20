@@ -1,4 +1,39 @@
 services:
+  configserver:
+    image: "caito25/configserver:v1.1.4"
+    container_name: configserver-ms
+    ports:
+      - "8071:8071"
+    healthcheck:
+      test: "wget --quiet --tries=1 --spider localhost:8071/actuator/health/readiness || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yaml
+      service: microservice-base-config
+
+  eurekaserver:
+    image: "caito25/eurekaserver:v1.1.4"
+    container_name: eurekaserver-ms
+    ports:
+      - "8070:8070"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    healthcheck:
+      test: "wget --quiet --tries=1 --spider localhost:8070/actuator/health/readiness || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yaml
+      service: microservice-configserver-config
+    environment:
+      SPRING_APPLICATION_NAME: "eurekaserver"
+
   accounts-db-service:
     container_name: accounts-db
     ports:
@@ -29,23 +64,9 @@ services:
       file: common-config.yaml
       service: microservice-db-config
 
-  configserver:
-    image: "caito25/configserver:v1.1.3"
-    container_name: configserver-ms
-    ports:
-      - "8071:8071"
-    healthcheck:
-      test: "wget --quiet --tries=1 --spider localhost:8071/actuator/health/readiness || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
-    extends:
-      file: common-config.yaml
-      service: microservice-base-config
 
   accounts:
-    image: "caito25/accounts:v1.1.3"
+    image: "caito25/accounts:v1.1.4"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -59,10 +80,10 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://accounts-db-service:5432/pg-accounts-db"
     extends:
       file: common-config.yaml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
   loans:
-    image: "caito25/loans:v1.1.3"
+    image: "caito25/loans:v1.1.4"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -76,10 +97,10 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://loans-db-service:5432/pg-loans-db"
     extends:
       file: common-config.yaml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
   cards:
-    image: "caito25/cards:v1.1.3"
+    image: "caito25/cards:v1.1.4"
     container_name: cards-ms
     ports:
       - "9000:9000"
@@ -93,7 +114,7 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://cards-db-service:5432/pg-cards-db"
     extends:
       file: common-config.yaml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
 networks:
   capferbank:

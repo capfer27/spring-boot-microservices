@@ -1,6 +1,7 @@
 package com.promath.accounts.mapper;
 
 import com.promath.accounts.dto.CustomerDTO;
+import com.promath.accounts.dto.CustomerDetailsDTO;
 import com.promath.accounts.entity.Customer;
 
 public final class CustomerMapper {
@@ -26,5 +27,13 @@ public final class CustomerMapper {
         customer.setEmail(customerDTO.getEmail());
         customer.setMobileNumber(customerDTO.getMobileNumber());
         return customer;
+    }
+
+    public static CustomerDetailsDTO mapToCustomerDetailsDTO(Customer customer) {
+        CustomerDetailsDTO customerDetailsDTO = new CustomerDetailsDTO();
+        customerDetailsDTO.setName(customer.getName());
+        customerDetailsDTO.setEmail(customer.getEmail());
+        customerDetailsDTO.setMobileNumber(customer.getMobileNumber());
+        return customerDetailsDTO;
     }
 }
