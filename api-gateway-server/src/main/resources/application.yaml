@@ -1,3 +1,37 @@
+#server:
+#  port: 8080
 spring:
   application:
-    name: api-gateway
+    name: api-gateway-server
+  # Set up the url details of the config server
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true # enable the discovery locator to automatically route to services registered in eureka
+
+# Enable the actuator to refresh the properties at run time
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # enable all available endpoints inside the actuator
+  endpoint:
+    gateway:
+      access: "unrestricted" # allow access to the gateway actuator
+#      enabled: true # enable the gateway actuator
+  info:
+    env:
+      enabled: true
+
+# Useful information to display in eureka dashboard when multiple services are connected with it.
+# It'll also be displayed as part of actuator info url.
+info:
+  app:
+    name: "api-gateway-server"
+    description: "Capfer Bank Gateway Server application"
+    version: "1.0.0"
+
+
