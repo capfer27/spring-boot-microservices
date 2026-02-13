@@ -16,7 +16,7 @@ services:
 #      service: network-deploy-service
 
   configserver:
-    image: "caito25/configserver:v1.1.4"
+    image: "caito25/configserver:v1.1.5"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -34,7 +34,7 @@ services:
       service: microservice-base-config
 
   eurekaserver:
-    image: "caito25/eurekaserver:v1.1.4"
+    image: "caito25/eurekaserver:v1.1.5"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -102,7 +102,7 @@ services:
       service: microservice-configserver-config
 
   loans:
-    image: "caito25/loans:v1.1.4"
+    image: "caito25/loans:v1.1.5"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -119,7 +119,7 @@ services:
       service: microservice-configserver-config
 
   cards:
-    image: "caito25/cards:v1.1.4"
+    image: "caito25/cards:v1.1.5"
     container_name: cards-ms
     ports:
       - "9000:9000"
