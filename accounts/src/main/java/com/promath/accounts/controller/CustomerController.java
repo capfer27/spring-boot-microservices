@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
         description = "REST APIs in CapferBank to FETCH customers details "
 )
 @RestController
-@RequestMapping(path = "/api/customers", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
 public class CustomerController {
 
