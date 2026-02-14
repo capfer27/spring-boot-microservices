@@ -12,8 +12,8 @@ spring:
         webflux:
           discovery:
             locator:
-              enabled: true # enable the discovery locator to automatically route to services registered in eureka
-#                lower-case-service-id: true
+              enabled: false # enable the discovery locator to automatically route to services registered in eureka
+              lower-case-service-id: true
 #            x-forwarded:
 #              for-enabled: true # to forward the original host and port details to the downstream services
 #              proto-enabled: true
