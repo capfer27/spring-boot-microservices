@@ -71,6 +71,12 @@ info:
     description: "Capfer Bank Account application"
     version: "1.0.0"
 
+logging:
+  level:
+    com:
+      capfer:
+        accounts: DEBUG
+
 
 # Backed up and no longer required
 #  config:

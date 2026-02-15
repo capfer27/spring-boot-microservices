@@ -5,8 +5,9 @@ import com.promath.accounts.dto.CustomerDetailsDTO;
 public interface ICustomersService {
     /**
      *
-     * @param mobileNumber - Input Mobile Number
+     * @param mobileNumber  - Input Mobile Number
+     * @param correlationId
      * @return Customer Details based on a given mobile number
      */
-    CustomerDetailsDTO fetchCustomerDetails(String mobileNumber);
+    CustomerDetailsDTO fetchCustomerDetails(String mobileNumber, String correlationId);
 }

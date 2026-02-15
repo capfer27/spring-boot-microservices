@@ -40,4 +40,10 @@ info:
     description: "Capfer Bank Gateway Server application"
     version: "1.0.0"
 
+logging:
+  level:
+    com:
+      capfer:
+        apigatewayserver: DEBUG
+
 

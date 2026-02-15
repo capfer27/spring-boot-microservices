@@ -72,6 +72,12 @@ info:
     description: "Capfer Bank Loans application"
     version: "1.0.0"
 
+logging:
+  level:
+    com:
+      capfer:
+        loans: DEBUG
+
 # Backed up and no longer required
 #  config:
 #    import:

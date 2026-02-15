@@ -69,6 +69,12 @@ info:
     description: "Capfer Bank Cards application"
     version: "1.0.0"
 
+logging:
+  level:
+    com:
+      capfer:
+        cards: DEBUG
+
 # Backed up and no longer required
 #  config:
 #    import:

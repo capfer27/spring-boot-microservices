@@ -32,11 +32,12 @@ public class CustomersServiceImpl implements ICustomersService {
 
     /**
      *
-     * @param mobileNumber - Input Mobile Number
+     * @param mobileNumber  - Input Mobile Number
+     * @param correlationId
      * @return Customer Details based on a given mobile number
      */
     @Override
-    public CustomerDetailsDTO fetchCustomerDetails(String mobileNumber) {
+    public CustomerDetailsDTO fetchCustomerDetails(String mobileNumber, String correlationId) {
         CustomerAccountInfoDTO customerAccountInfo = AccountHelper.getCustomerAccountInfo(
                 mobileNumber,
                 customerRepository,
@@ -57,12 +58,12 @@ public class CustomersServiceImpl implements ICustomersService {
         // Therefore, we need to make a request to these services.
 
         // Fetch Loans Info
-        ResponseEntity<LoansDTO> loansDTOResponseEntity = this.loansFeignClient.fetchLoanDetails(mobileNumber);
+        ResponseEntity<LoansDTO> loansDTOResponseEntity = this.loansFeignClient.fetchLoanDetails(correlationId, mobileNumber);
         LoansDTO loansDTO = loansDTOResponseEntity.getBody();
         customerDetailsDTO.setLoansDTO(loansDTO);
 
         // Fetch Cards DTO
-        ResponseEntity<CardsDTO> cardsDTOResponseEntity = this.cardsFeignClient.fetchCardDetails(mobileNumber);
+        ResponseEntity<CardsDTO> cardsDTOResponseEntity = this.cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
         CardsDTO cardsDTO = cardsDTOResponseEntity.getBody();
         customerDetailsDTO.setCardsDTO(cardsDTO);
 
