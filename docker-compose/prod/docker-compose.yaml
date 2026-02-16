@@ -1,6 +1,6 @@
 services:
   configserver:
-    image: "caito25/configserver:v1.1.5"
+    image: "caito25/configserver:v1.1.6"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -15,7 +15,7 @@ services:
       service: microservice-base-config
 
   eurekaserver:
-    image: "caito25/eurekaserver:v1.1.5"
+    image: "caito25/eurekaserver:v1.1.6"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -66,7 +66,7 @@ services:
 
 
   accounts:
-    image: "caito25/accounts:v1.1.5"
+    image: "caito25/accounts:v1.1.6"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -75,6 +75,12 @@ services:
         condition: service_healthy
       configserver:
         condition: service_healthy
+    healthcheck:
+      test: "wget --quiet --tries=1 --spider localhost:8080/actuator/health/readiness || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "accounts"
       SPRING_DATASOURCE_URL: "jdbc:postgresql://accounts-db-service:5432/pg-accounts-db"
@@ -83,7 +89,7 @@ services:
       service: microservice-eureka-config
 
   loans:
-    image: "caito25/loans:v1.1.5"
+    image: "caito25/loans:v1.1.6"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -92,6 +98,12 @@ services:
         condition: service_healthy
       configserver:
         condition: service_healthy
+    healthcheck:
+      test: "wget --quiet --tries=1 --spider localhost:8090/actuator/health/readiness || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "loans"
       SPRING_DATASOURCE_URL: "jdbc:postgresql://loans-db-service:5432/pg-loans-db"
@@ -100,7 +112,7 @@ services:
       service: microservice-eureka-config
 
   cards:
-    image: "caito25/cards:v1.1.5"
+    image: "caito25/cards:v1.1.6"
     container_name: cards-ms
     ports:
       - "9000:9000"
@@ -109,9 +121,33 @@ services:
         condition: service_healthy
       configserver:
         condition: service_healthy
+    healthcheck:
+      test: "wget --quiet --tries=1 --spider localhost:9000/actuator/health/readiness || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "cards"
       SPRING_DATASOURCE_URL: "jdbc:postgresql://cards-db-service:5432/pg-cards-db"
+    extends:
+      file: common-config.yaml
+      service: microservice-eureka-config
+
+  apigatewayserver:
+    image: "caito25/api-gateway-server:v1.1.6"
+    container_name: api-gateway-server-ms
+    ports:
+      - "8072:8072"
+    depends_on:
+      accounts:
+        condition: service_healthy
+      loans:
+        condition: service_healthy
+      cards:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "api-gateway-server"
     extends:
       file: common-config.yaml
       service: microservice-eureka-config
